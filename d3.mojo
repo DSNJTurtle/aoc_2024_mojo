@@ -1,6 +1,5 @@
 from testing import assert_equal
-from commons import read_input, read_test, input_lines_to_ints
-from collections import Dict
+from commons import read_input, read_test
 from python import Python
 
 
