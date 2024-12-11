@@ -1,56 +1,48 @@
 from testing import assert_equal
-from commons import read_input, read_test
+from commons import read_input, read_test, input_lines_to_ints
 from collections import Dict
 
 
-fn get_input(lines: List[String]) raises -> Tuple[List[Int], List[Int]]:
+fn partA(lines: List[String]) raises -> Int:
+    var int_lines = input_lines_to_ints(lines)
     var lhs = List[Int]()
     var rhs = List[Int]()
-    for l in lines:
-        var p = List[Int]()
-        for x in str(l[]).split(" "):
-            if str(x[]) != "":
-                p.append(atol(str(x[])))
-
-        lhs.append(p[0])
-        rhs.append(p[1])
+    for x in int_lines:
+        lhs.append(x[][0])
+        rhs.append(x[][1])
 
     sort(lhs)
     sort(rhs)
 
-    return Tuple(lhs, rhs)
-
-
-fn partA(lines: List[String]) raises -> Int:
-    var lr = get_input(lines)
-
     var res: Int = 0
-    for i in range(len(lr[0])):
-        var x = lr[0][i]
-        var y = lr[1][i]
+    for i in range(len(lhs)):
+        var x = lhs[i]
+        var y = rhs[i]
         res += max(x, y) - min(x, y)
 
     return res
 
 
 fn partB(lines: List[String]) raises -> Int:
-    var lr = get_input(lines)
+    # var lr = get_input(lines)
+    var int_lines = input_lines_to_ints(lines)
 
     var d = Dict[Int, Int]()
-    for x in lr[0]:
-        d[x[]] = 0
+    for x in int_lines:
+        d[x[][0]] = 0
 
-    for x in lr[1]:
-        var _x = x[]
-        var y = d.get(_x)
+    for x in int_lines:
+        var _x = x[][0]
+        var _y = x[][1]
+        var y = d.get(_y)
         if y:
-            d[_x] = y.value() + 1
+            d[_y] = y.value() + 1
         else:
-            d[_x] = 1
+            d[_y] = 1
 
     var res: Int = 0
-    for n in lr[0]:
-        res += n[] * d[n[]]
+    for n in int_lines:
+        res += n[][0] * d[n[][0]]
 
     return res
 
